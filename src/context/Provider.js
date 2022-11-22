@@ -4,18 +4,42 @@ import StarWarsContext from './StarWarsContext';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
+  const [dataFilter, setDataFilter] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     const fetchPlanets = async () => {
-      const response = await fetch('https://swapi.dev/api/planets');
-      const { results } = await response.json();
-      setData(results);
+      try {
+        const response = await fetch('https://swapi.dev/api/planets');
+        const { results } = await response.json();
+        setData(results);
+        setDataFilter(results);
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchPlanets();
   }, []);
 
+  const handleChange = (value) => {
+    setInputValue(value);
+  };
+
+  useEffect(() => {
+    const filtered = data.filter((planet) => (
+      planet.name.includes(inputValue)
+    ));
+    setDataFilter(filtered);
+  }, [inputValue, data]);
+
   const contextValue = {
     data,
+    dataFilter,
+    handleChange,
+    filterByName: {
+      name: inputValue,
+    },
+
   };
 
   return (
