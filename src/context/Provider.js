@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [columnValue, setColumnValue] = useState('population');
   const [operatorValue, setOperatorValue] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
 
   useEffect(() => {
     const fetchPlanets = async () => {
@@ -24,29 +25,6 @@ function Provider({ children }) {
     fetchPlanets();
   }, []);
 
-  const handleChange = (value) => {
-    setInputValue(value);
-  };
-
-  const handleChangesNumeric = () => {
-    if (operatorValue === 'maior que') {
-      const filterBiggerThen = data.filter((planet) => (
-        Number(planet[columnValue]) > Number(numberValue)
-      ));
-      setDataFilter(filterBiggerThen);
-    } else if (operatorValue === 'menor que') {
-      const filterLessThan = data.filter((planet) => (
-        Number(planet[columnValue]) < Number(numberValue)
-      ));
-      setDataFilter(filterLessThan);
-    } else {
-      const filterByEqual = data.filter((planet) => (
-        Number(planet[columnValue]) === Number(numberValue)
-      ));
-      setDataFilter(filterByEqual);
-    }
-  };
-
   useEffect(() => {
     const filtered = data.filter((planet) => (
       planet.name.includes(inputValue)
@@ -54,25 +32,46 @@ function Provider({ children }) {
     setDataFilter(filtered);
   }, [inputValue, data]);
 
+  const handleChangesNumeric = () => {
+    if (operatorValue === 'maior que') {
+      const filterBiggerThen = dataFilter.filter((planet) => (
+        Number(planet[columnValue]) > Number(numberValue)
+      ));
+      setDataFilter(filterBiggerThen);
+    } else if (operatorValue === 'menor que') {
+      const filterLessThen = dataFilter.filter((planet) => (
+        Number(planet[columnValue]) < Number(numberValue)
+      ));
+      setDataFilter(filterLessThen);
+    } else {
+      const filterByEqual = dataFilter.filter((planet) => (
+        Number(planet[columnValue]) === Number(numberValue)
+      ));
+      setDataFilter(filterByEqual);
+    }
+
+    setFilterByNumericValues(filterByNumericValues.concat({
+      column: columnValue,
+      comparison: operatorValue,
+      value: numberValue,
+    }));
+  };
+
   const contextValue = {
     data,
     dataFilter,
-    handleChange,
     filterByName: {
       name: inputValue,
     },
-    setColumnValue,
-    setOperatorValue,
-    setNumberValue,
     numberValue,
-    handleChangesNumeric,
-    filterByNumericValues: [
-      {
-        column: columnValue,
-        comparison: operatorValue,
-        value: numberValue,
-      },
-    ],
+    filterByNumericValues,
+    functions: {
+      setInputValue,
+      setColumnValue,
+      setOperatorValue,
+      setNumberValue,
+      handleChangesNumeric,
+    },
   };
 
   return (

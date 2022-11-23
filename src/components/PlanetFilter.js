@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function PlanetFilter() {
-  const { handleChange } = useContext(StarWarsContext);
+  const { functions } = useContext(StarWarsContext);
+  const { setInputValue } = functions;
 
   return (
     <input
       type="text"
       data-testid="name-filter"
-      onChange={ ({ target }) => handleChange(target.value) }
+      onChange={ ({ target }) => setInputValue(target.value) }
     />
   );
 }
