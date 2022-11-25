@@ -2,21 +2,15 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function NumericFilter() {
-  const { functions, numberValue } = useContext(StarWarsContext);
+  const { functions, numberValue, columnNewFilter } = useContext(StarWarsContext);
   const {
     setColumnValue,
     setOperatorValue,
     setNumberValue,
     handleChangesNumeric,
+    clearAllFilters,
   } = functions;
 
-  const columnFilter = [
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ];
   const operatorFilter = ['maior que', 'menor que', 'igual a'];
 
   return (
@@ -28,7 +22,7 @@ function NumericFilter() {
           data-testid="column-filter"
           onChange={ ({ target }) => setColumnValue(target.value) }
         >
-          {columnFilter.map((item) => (
+          {columnNewFilter.map((item) => (
             <option value={ item } key={ item }>{item}</option>
           ))}
         </select>
@@ -64,6 +58,13 @@ function NumericFilter() {
         onClick={ handleChangesNumeric }
       >
         Filtrar
+      </button>
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ clearAllFilters }
+      >
+        Remover Filtros
       </button>
     </>
   );

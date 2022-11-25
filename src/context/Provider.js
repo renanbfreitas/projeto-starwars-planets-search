@@ -10,6 +10,14 @@ function Provider({ children }) {
   const [operatorValue, setOperatorValue] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [columnNewFilter, setColumnNewFilter] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
+  const [enableRemoveFilter, setEnableRemoveFilter] = useState(false);
 
   useEffect(() => {
     const fetchPlanets = async () => {
@@ -33,29 +41,64 @@ function Provider({ children }) {
   }, [inputValue, data]);
 
   const handleChangesNumeric = () => {
-    if (operatorValue === 'maior que') {
-      const filterBiggerThen = dataFilter.filter((planet) => (
-        Number(planet[columnValue]) > Number(numberValue)
-      ));
-      setDataFilter(filterBiggerThen);
-    } else if (operatorValue === 'menor que') {
-      const filterLessThen = dataFilter.filter((planet) => (
-        Number(planet[columnValue]) < Number(numberValue)
-      ));
-      setDataFilter(filterLessThen);
-    } else {
-      const filterByEqual = dataFilter.filter((planet) => (
-        Number(planet[columnValue]) === Number(numberValue)
-      ));
-      setDataFilter(filterByEqual);
-    }
-
     setFilterByNumericValues(filterByNumericValues.concat({
       column: columnValue,
       comparison: operatorValue,
       value: numberValue,
     }));
+    setEnableRemoveFilter(false);
+    setColumnNewFilter(columnNewFilter.filter((item) => item !== columnValue));
   };
+
+  const clearAllFilters = () => {
+    setDataFilter(data);
+    setFilterByNumericValues([]);
+  };
+
+  const removeFilter = (value) => {
+    setColumnNewFilter(columnNewFilter.concat(value));
+    setFilterByNumericValues(filterByNumericValues.filter((i) => i.column !== value));
+    setEnableRemoveFilter(true);
+  };
+
+  const setBaseArray = (baseArray) => {
+    filterByNumericValues.forEach((item) => {
+      if (item.comparison === 'maior que') {
+        const filterBiggerThen = baseArray.filter((planet) => (
+          Number(planet[item.column]) > Number(item.value)
+        ));
+        setDataFilter(filterBiggerThen);
+      } else if (item.comparison === 'menor que') {
+        const filterLessThen = baseArray.filter((planet) => (
+          Number(planet[item.column]) < Number(item.value)
+        ));
+        setDataFilter(filterLessThen);
+      } else {
+        const filterByEqual = baseArray.filter((planet) => (
+          Number(planet[item.column]) === Number(item.value)
+        ));
+        setDataFilter(filterByEqual);
+      }
+    });
+  };
+
+  const setFilterByCondition = () => {
+    if (enableRemoveFilter) {
+      setBaseArray(data);
+    } else {
+      setBaseArray(dataFilter);
+    }
+  };
+
+  useEffect(() => {
+    setColumnValue(columnNewFilter[0]);
+    setNumberValue(0);
+    if (filterByNumericValues.length < 1) {
+      setDataFilter(data);
+    } else {
+      setFilterByCondition();
+    }
+  }, [filterByNumericValues]);
 
   const contextValue = {
     data,
@@ -63,6 +106,7 @@ function Provider({ children }) {
     filterByName: {
       name: inputValue,
     },
+    columnNewFilter,
     numberValue,
     filterByNumericValues,
     functions: {
@@ -71,6 +115,8 @@ function Provider({ children }) {
       setOperatorValue,
       setNumberValue,
       handleChangesNumeric,
+      clearAllFilters,
+      removeFilter,
     },
   };
 
