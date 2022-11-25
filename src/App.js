@@ -4,6 +4,7 @@ import Provider from './context/Provider';
 import PlanetFilter from './components/PlanetFilter';
 import NumericFilter from './components/NumericFilter';
 import MultipleFilter from './components/MultipleFilter';
+import PlanetOrder from './components/PlanetOrder';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <PlanetFilter />
       <NumericFilter />
       <MultipleFilter />
+      <PlanetOrder />
     </Provider>
   );
 }
