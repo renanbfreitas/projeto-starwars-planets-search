@@ -6,11 +6,14 @@ function PlanetFilter() {
   const { setInputValue } = functions;
 
   return (
-    <input
-      type="text"
-      data-testid="name-filter"
-      onChange={ ({ target }) => setInputValue(target.value) }
-    />
+    <div className="planetFilter">
+      <input
+        type="text"
+        data-testid="name-filter"
+        className="filter"
+        onChange={ ({ target }) => setInputValue(target.value) }
+      />
+    </div>
   );
 }
 

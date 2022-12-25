@@ -14,12 +14,13 @@ function NumericFilter() {
   const operatorFilter = ['maior que', 'menor que', 'igual a'];
 
   return (
-    <>
+    <div className="numericFilter">
       <label htmlFor="column">
         Coluna:
         <select
           id="column"
           data-testid="column-filter"
+          className="coluna"
           onChange={ ({ target }) => setColumnValue(target.value) }
         >
           {columnNewFilter.map((item) => (
@@ -33,6 +34,7 @@ function NumericFilter() {
         <select
           id="operator"
           data-testid="comparison-filter"
+          className="operador"
           onChange={ ({ target }) => setOperatorValue(target.value) }
         >
           {operatorFilter.map((item) => (
@@ -47,6 +49,7 @@ function NumericFilter() {
           type="number"
           id="number"
           data-testid="value-filter"
+          className="valor"
           value={ numberValue }
           onChange={ ({ target }) => setNumberValue(target.value) }
         />
@@ -55,6 +58,7 @@ function NumericFilter() {
       <button
         type="button"
         data-testid="button-filter"
+        className="filtrar"
         onClick={ handleChangesNumeric }
       >
         Filtrar
@@ -62,11 +66,12 @@ function NumericFilter() {
       <button
         type="button"
         data-testid="button-remove-filters"
+        className="remover-filtro"
         onClick={ clearAllFilters }
       >
         Remover Filtros
       </button>
-    </>
+    </div>
   );
 }
 

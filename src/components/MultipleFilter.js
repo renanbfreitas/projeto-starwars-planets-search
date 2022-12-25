@@ -6,7 +6,7 @@ function MultipleFilter() {
   const { removeFilter } = functions;
 
   return (
-    <div>
+    <div className="multipleFilter">
       {filterByNumericValues.length > 0 && (
         filterByNumericValues.map((item, index) => (
           <div key={ index } data-testid="filter">

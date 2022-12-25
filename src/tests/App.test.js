@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import mockList from './mockList.test';
+import mockList from './mockList';
 import App from '../App';
 
 describe('1- Testando o arquivo App', () => {
@@ -29,4 +29,26 @@ describe('1- Testando o arquivo App', () => {
     const operatorFilter = screen.getByText('maior que')
     expect(operatorFilter).toHaveTextContent('maior que')
   })
+
+  test('4- Verifica se o botão Remover Filtro está habilitado', () => {
+    render(<App />)
+    const buttonRmvFilter = screen.getByTestId('button-remove-filters');
+    userEvent.click(buttonRmvFilter);
+    const operatorFilter = screen.getByText('maior que')
+    expect(operatorFilter).toHaveTextContent('maior que')
+  })
+
+  test('5- Verifica se o botão Remover está habilitado', () => {
+    render(<App />)
+    const buttonRmv = screen.queryByRole('button', {  name: /remover/i});
+    userEvent.click(buttonRmv);
+    expect(buttonRmv).toBeInTheDocument();
+  })
+
+  test('6- Verifica se existem campos para digitar os nomes dos planetas', () => {
+    render(<App />);
+    const inputName = screen.getByTestId('name-filter');
+    userEvent.type(inputName, 'o');
+    expect(inputName).toBeInTheDocument();
   });
+});

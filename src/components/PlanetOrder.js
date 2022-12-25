@@ -14,13 +14,14 @@ function PlanetOrder() {
   ];
 
   return (
-    <>
+    <main className="planetOrder">
       <label htmlFor="column-sort">
         Ordernar:
         <select
           data-testid="column-sort"
           name="input"
           id="column-sort"
+          className="operadorColumn"
           onChange={ (event) => setOrderColumn(event.target.value) }
         >
           {column.map((item) => (
@@ -59,13 +60,14 @@ function PlanetOrder() {
       </label>
 
       <button
+        className="ordenar"
         type="button"
         data-testid="column-sort-button"
         onClick={ changeDataOrder }
       >
         Ordernar
       </button>
-    </>
+    </main>
   );
 }
 

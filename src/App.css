@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Shadows+Into+Light&display=swap') ;
+
 .App {
   text-align: center;
 }
@@ -38,4 +40,137 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  align-items: center;
+  background: url('./imagem/Star_Wars_Logo.svg.png');
+  background-position: 5% 50%;
+  background-size: cover;
+  border: 1px solid gold;
+  display: absolute;
+  justify-content: center;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: Bungee Spice , cursive;
+  font-size: 7pt;
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+}
+
+table th {
+  background-color: rgba(255, 255, 0, 0.5);
+  padding: 5px;
+  text-align: center;
+  width: calc(100% / 13);
+}
+
+table td {
+  border: 1px solid gray;
+  color: white;
+  font-weight: 500;
+  height: 70px;
+  padding: 5px;
+  text-align: center;
+}
+
+.multipleFilter {
+  border-radius: 20px;
+  color: gold;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.numericFilter {
+  align-items: center;
+  border-radius: 20px;
+  color: gold;
+  display: flex;
+  font-size: 10pt;
+  justify-content: center;
+  margin: 8px 0;
+  text-align: center;
+}
+
+.planetOrder {
+  border-radius: 20px;
+  color: gold;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.planetFilter {
+  border: none;
+  border-radius: 20px;
+  color: gold;
+  display: flex;
+  font-size: 10pt;
+  justify-content: center;
+  outline: none;
+  text-align: center;
+}
+
+.ordenar {
+  border-radius: 20px;
+  color: black;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.filtrar {
+  border-radius: 20px;
+  color: black;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.remover-filtro {
+  border-radius: 20px;
+  color: black;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.filter {
+  border-radius: 20px;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.coluna {
+  border-radius: 20px;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.operador {
+  border-radius: 20px;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.valor {
+  border-radius: 20px;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.operadorColumn {
+  border-radius: 20px;
+  display: center;
+  font-size: 10pt;
+  text-align: center;
 }
