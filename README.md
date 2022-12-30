@@ -24,7 +24,7 @@ src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wor
 
 <img src="https://img.shields.io/static/v1?label=Link&message=StarWars Planets Search&color=green&style=for-the-badge&logo=github"/>
 
-### <b> <a href="https://renanbfreitas.github.io/starwars-planets-search/">StarWars Planets Search</a> </b> <br>
+### <b> <a href="https://projeto-starwars-planets-search.vercel.app/">StarWars Planets Search</a> </b> <br>
 
 </div>
 
